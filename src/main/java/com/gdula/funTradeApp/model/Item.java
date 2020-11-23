@@ -1,4 +1,4 @@
-package com.gdula.funTradeApp;
+package com.gdula.funTradeApp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +24,6 @@ public class Item {
     private String name;
     @NotBlank
     private Integer price;
-
 
     @NotBlank
     private Category category;

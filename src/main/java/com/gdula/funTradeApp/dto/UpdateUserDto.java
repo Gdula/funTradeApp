@@ -1,0 +1,36 @@
+package com.gdula.funTradeApp.dto;
+
+import com.gdula.funTradeApp.model.Item;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UpdateUserDto {
+    @NotBlank
+    @Size(min = 2)
+    private String name;
+    @NotBlank
+    @Size(min = 2)
+    private String surname;
+    @NotBlank
+    @Size(min = 8)
+    private String password;
+    @NotBlank
+    @Size(min = 3)
+    private String address;
+    @NotBlank
+    @Size(min = 3)
+    private String city;
+    @NotBlank
+    @Size(min = 3)
+    private String postalCode;
+
+    private List<Item> items;
+}

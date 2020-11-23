@@ -1,25 +1,18 @@
-package com.gdula.funTradeApp;
+package com.gdula.funTradeApp.dto;
 
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
+import com.gdula.funTradeApp.model.Item;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-
-@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class User {
-    @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(columnDefinition = "varchar(100)")
-    private String id;
+@AllArgsConstructor
+public class CreateUserDto {
     @NotBlank
     @Size(min = 3)
     private String login;
@@ -42,9 +35,5 @@ public class User {
     @Size(min = 3)
     private String postalCode;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Item> item;
-
-
-
+    private List<Item> items;
 }
