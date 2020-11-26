@@ -1,37 +1,27 @@
-package com.gdula.funTradeApp.model;
+package com.gdula.funTradeApp.service.dto;
 
+import com.gdula.funTradeApp.model.Item;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-
-@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class User {
-    @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(columnDefinition = "varchar(100)")
-    private String id;
+@AllArgsConstructor
+public class CreateUserDto {
     @NotBlank
     @Size(min = 3)
     private String login;
     @NotBlank
-    @Size(min = 2)
+    @Size(min = 3)
     private String name;
     @NotBlank
-    @Size(min = 2)
+    @Size(min = 3)
     private String surname;
     @NotBlank
     @Size(min = 8)
@@ -43,16 +33,11 @@ public class User {
     @Size(min = 3)
     private String city;
     @NotBlank
-    @Size(min = 3)
+    @Size(min = 6)
     private String zip;
     @NotBlank
     @Pattern(regexp = "\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b",
             message = "Podany mail jest nieprawidłowy")
     private String mail;
-
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Item> items;
-
-
-
 }
