@@ -5,12 +5,11 @@ import com.gdula.funTradeApp.repository.UserRepository;
 import com.gdula.funTradeApp.service.dto.CreateUserDto;
 import com.gdula.funTradeApp.service.dto.UpdateUserDto;
 import com.gdula.funTradeApp.service.dto.UserDto;
+import com.gdula.funTradeApp.service.exception.UserAlreadyExists;
 import com.gdula.funTradeApp.service.exception.UserDataInvalid;
 import com.gdula.funTradeApp.service.exception.UserNotFound;
 import com.gdula.funTradeApp.service.mapper.UserDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +25,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Bean
-    PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    public UserDto createUser(CreateUserDto dto) throws UserDataInvalid {
+    public UserDto createUser(CreateUserDto dto) throws UserDataInvalid, UserAlreadyExists {
         if (dto.getLogin() == null || dto.getLogin().isEmpty() ||
             dto.getName() == null || dto.getName().isEmpty() ||
             dto.getSurname() == null || dto.getSurname().isEmpty() ||
@@ -41,6 +35,11 @@ public class UserService {
             dto.getZip() == null || dto.getZip().isEmpty()) {
             throw new UserDataInvalid();
         }
+
+        if (userRepository.existsByLogin(dto.getLogin())) {
+            throw new UserAlreadyExists();
+        }
+
         User userToSave = mapper.toModel(dto);
 
         String hashedPass = passwordEncoder.encode(userToSave.getPassword());

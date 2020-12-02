@@ -36,7 +36,7 @@ public class CreateUserDto {
     @Size(min = 6)
     private String zip;
     @NotBlank
-    @Pattern(regexp = "\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b",
+    @Pattern(regexp = "^\\S+@\\S+\\.\\S+$",
             message = "Podany mail jest nieprawidłowy")
     private String mail;
     private List<Item> items;

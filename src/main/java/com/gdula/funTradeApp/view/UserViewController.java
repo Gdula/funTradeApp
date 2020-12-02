@@ -1,0 +1,67 @@
+package com.gdula.funTradeApp.view;
+
+import com.gdula.funTradeApp.service.UserService;
+import com.gdula.funTradeApp.service.dto.CreateUserDto;
+import com.gdula.funTradeApp.service.dto.UserDto;
+import com.gdula.funTradeApp.service.exception.UserAlreadyExists;
+import com.gdula.funTradeApp.service.exception.UserDataInvalid;
+import com.gdula.funTradeApp.service.mapper.UserDtoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@Controller
+public class UserViewController {
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserDtoMapper userDtoMapper;
+
+    @GetMapping("/users")
+    public ModelAndView displayUsersTable() {
+        ModelAndView mav = new ModelAndView("users-table");
+        List<UserDto> allUsers = userService.getAllUsers();
+        mav.addObject("users", allUsers);
+
+        return mav;
+    }
+
+    @GetMapping("/create-user")
+    public String displayCreateUserForm(Model model) {
+        CreateUserDto dto = new CreateUserDto();
+        model.addAttribute("dto", dto);
+
+        return "create-user-form";
+    }
+
+    @PostMapping("/create-user")
+    public String createUser(@Valid @ModelAttribute(name = "dto") CreateUserDto dto, BindingResult bindingResult, Model model) {
+
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("users", userService.getAllUsers());
+            return "create-user-form";
+        }
+        try {
+            userService.createUser(dto);
+        } catch (UserDataInvalid | UserAlreadyExists e) {
+            // powrót do formularza z tymi samymi danymi
+            e.printStackTrace();
+            model.addAttribute("dto", dto);
+            model.addAttribute("users", userService.getAllUsers());
+
+            return "create-user-form";
+        }
+
+        return "redirect:/users";
+    }
+
+
+}
