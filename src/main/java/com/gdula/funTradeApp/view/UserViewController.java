@@ -2,9 +2,11 @@ package com.gdula.funTradeApp.view;
 
 import com.gdula.funTradeApp.service.UserService;
 import com.gdula.funTradeApp.service.dto.CreateUserDto;
+import com.gdula.funTradeApp.service.dto.UpdateUserDto;
 import com.gdula.funTradeApp.service.dto.UserDto;
 import com.gdula.funTradeApp.service.exception.UserAlreadyExists;
 import com.gdula.funTradeApp.service.exception.UserDataInvalid;
+import com.gdula.funTradeApp.service.exception.UserNotFound;
 import com.gdula.funTradeApp.service.mapper.UserDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,5 +66,42 @@ public class UserViewController {
         return "redirect:/users";
     }
 
+    @GetMapping("/delete-user/{id}")
+    public String deleteUser(@PathVariable String id) {
+        try {
+            userService.deleteUserById(id);
+        } catch (UserNotFound userNotFound) {
+            userNotFound.printStackTrace();
+        }
 
+        return "redirect:/users";
+    }
+
+    @GetMapping("/update-user/{id}")
+    public ModelAndView displayUpdateUserForm(@PathVariable String id) {
+
+        try {
+            UserDto userById = userService.getUserById(id);
+
+            UpdateUserDto updateUserDto = userDtoMapper.toUpdateDto(userById);
+            ModelAndView mav = new ModelAndView("update-user-form");
+            mav.addObject("dto", updateUserDto);
+            mav.addObject("id", id);
+            return mav;
+
+        } catch (UserNotFound userNotFound) {
+            return new ModelAndView("redirect:/users");
+        }
+    }
+
+    @PostMapping("/update-user/{id}")
+    public String updateUser(@ModelAttribute UpdateUserDto dto, @PathVariable String id) {
+
+        try {
+            userService.updateUser(dto, id);
+            return "redirect:/users";
+        } catch (UserDataInvalid | UserNotFound e) {
+            return "redirect:/update-user/" + id;
+        }
+    }
 }

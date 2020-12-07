@@ -12,7 +12,7 @@ import java.util.UUID;
 public class UserDtoMapper {
 
     public UserDto toDto(User user) {
-        return new UserDto(user.getId(), user.getLogin(), user.getName(), user.getSurname(),
+        return new UserDto(user.getId(), user.getLogin(), user.getName(), user.getSurname(), user.getPassword(),
                 user.getAddress(), user.getCity(), user.getZip(), user.getMail(), user.getItems());
     }
 
@@ -23,7 +23,7 @@ public class UserDtoMapper {
                 dto.getAddress(), dto.getCity(), dto.getZip(), dto.getMail(), dto.getItems());
     }
 
-    public UpdateUserDto toUpdateDto(User userById) {
+    public UpdateUserDto toUpdateDto(UserDto userById) {
         return new UpdateUserDto(userById.getName(), userById.getSurname(), userById.getPassword(),
                 userById.getAddress(), userById.getCity(), userById.getZip(), userById.getMail(), userById.getItems());
     }

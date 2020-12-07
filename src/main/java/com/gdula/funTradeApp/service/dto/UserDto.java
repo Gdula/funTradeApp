@@ -23,6 +23,8 @@ public class UserDto {
     @NotBlank
     @Size(min = 3)
     private String surname;
+    @Size(min = 8)
+    private String password;
     @NotBlank
     @Size(min = 3)
     private String address;
