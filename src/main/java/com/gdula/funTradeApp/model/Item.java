@@ -23,7 +23,7 @@ public class Item {
     @Size(min = 3)
     private String name;
     @NotBlank
-    private Integer price;
+    private Float price;
 
     @NotBlank
     private Category category;

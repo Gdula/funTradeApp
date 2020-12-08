@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class UpdateUserDto {
     @Size(min = 6)
     private String zip;
     @NotBlank
+    @Pattern(regexp = "^\\S+@\\S+\\.\\S+$",
+            message = "Podany mail jest nieprawidłowy")
     private String mail;
     private List<Item> items;
 }
