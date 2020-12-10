@@ -63,7 +63,7 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-    public ItemDto getUserById(String id) throws ItemNotFound {
+    public ItemDto getItemById(String id) throws ItemNotFound {
         return itemRepository.findById(id)
                 .map(i -> mapper.toDto(i))
                 .orElseThrow(ItemNotFound::new);

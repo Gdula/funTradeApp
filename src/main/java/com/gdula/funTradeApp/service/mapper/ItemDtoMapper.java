@@ -19,4 +19,8 @@ public class ItemDtoMapper {
 
         return new Item(randomId, dto.getName(), dto.getPrice(), dto.getCategory(), dto.getShape(), dto.getOwner());
     }
+
+    public CreateUpdateItemDto toCreateUpdateItemDto(ItemDto dto) {
+        return new CreateUpdateItemDto(dto.getName(), dto.getPrice(), dto.getCategory(), dto.getShape(), dto.getOwner());
+    }
 }
