@@ -22,16 +22,16 @@ public class Item {
     @NotBlank
     @Size(min = 3)
     private String name;
-    @NotBlank
+
     private Float price;
 
-    @NotBlank
+
     private Category category;
     public static enum Category {
         Book, Game, Music, Other
     }
 
-    @NotBlank
+
     private Shape shape;
     public static enum Shape {
         NEW, USED

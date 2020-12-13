@@ -1,5 +1,6 @@
 package com.gdula.funTradeApp.view;
 
+import com.gdula.funTradeApp.model.Item;
 import com.gdula.funTradeApp.service.ItemService;
 import com.gdula.funTradeApp.service.dto.CreateUpdateItemDto;
 import com.gdula.funTradeApp.service.dto.ItemDto;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -38,6 +40,8 @@ public class ItemViewController {
     @GetMapping("/create-item")
     public String displayCreateItemForm(Model model) {
         CreateUpdateItemDto dto = new CreateUpdateItemDto();
+        model.addAttribute("categoryList", Arrays.asList(Item.Category.values()));
+        model.addAttribute("shapeList", Arrays.asList(Item.Shape.values()));
         model.addAttribute("dto", dto);
 
         return "create-item-form";
@@ -82,6 +86,8 @@ public class ItemViewController {
             ModelAndView mav = new ModelAndView("update-item-form");
             mav.addObject("dto", updateItemDto);
             mav.addObject("id", id);
+            mav.addObject("categoryList", Arrays.asList(Item.Category.values()));
+            mav.addObject("shapeList", Arrays.asList(Item.Shape.values()));
             return mav;
         } catch (ItemNotFound e) {
             return new ModelAndView("redirect:/items");
