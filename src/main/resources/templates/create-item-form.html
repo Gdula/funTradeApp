@@ -10,7 +10,7 @@
     Create new item
 </h1>
 
-<form action="#" th:action="@{/create-item}" th:object="${dto}" method="post">
+<form action="#" th:action="@{/create-item}" th:object="${dto}" method="post" enctype="multipart/form-data">
     <fieldset>
         <label for="name-field">Name</label>
         <input type="text" id="name-field" th:field="*{name}">
@@ -48,6 +48,14 @@
             <option th:each="c : ${shapeList}" th:value="${c}" th:text="${c}"></option>
         </select>
         <div style="color: red" th:if="${#fields.hasErrors('shape')}" th:errors="*{shape}"></div>
+
+        <br>
+
+        <label for="image-field">Add image</label>
+        <input type="file" name="file" id="image-field">
+        <div style="color: red" th:if="${#fields.hasErrors('image')}">
+            Incorrect image
+        </div>
 
         <br>
 

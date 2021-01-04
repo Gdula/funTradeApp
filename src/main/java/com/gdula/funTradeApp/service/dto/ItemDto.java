@@ -27,6 +27,8 @@ public class ItemDto {
 
     private Item.Category category;
 
+    private String image;
+
     private Item.Shape shape;
 
     private User owner;

@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -48,13 +46,13 @@ public class ItemViewController {
     }
 
     @PostMapping("/create-item")
-    public String createItem(@Valid @ModelAttribute(name = "dto") CreateUpdateItemDto dto, BindingResult bindingResult, Model model) {
+    public String createItem(@Valid @ModelAttribute(name = "dto") CreateUpdateItemDto dto, BindingResult bindingResult, Model model, @RequestParam("file") MultipartFile file) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("items", itemService.getAllItems());
             return "create-item-form";
         }
         try {
-            itemService.createItem(dto);
+            itemService.createItem(dto, file);
         } catch (ItemDataInvalid e) {
             e.printStackTrace();
             model.addAttribute("dto",dto);

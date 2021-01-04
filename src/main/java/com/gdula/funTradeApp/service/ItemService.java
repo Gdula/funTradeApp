@@ -11,8 +11,13 @@ import com.gdula.funTradeApp.service.exception.ItemNotFound;
 import com.gdula.funTradeApp.service.mapper.ItemDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +31,7 @@ public class ItemService {
     @Autowired
     private UserRepository userRepository;
 
-    public ItemDto createItem(CreateUpdateItemDto dto) throws ItemDataInvalid {
+    public ItemDto createItem(CreateUpdateItemDto dto, MultipartFile file) throws ItemDataInvalid {
         if (dto.getName() == null || dto.getName().isEmpty() ||
                 dto.getPrice() == null || dto.getDescription() == null ||
                 dto.getDescription().isEmpty() || dto.getCategory() == null || dto.getShape() == null) {
@@ -36,6 +41,17 @@ public class ItemService {
         Item itemToSave = mapper.toModel(dto);
         User owner = userRepository.findFirstByLogin(securityUtils.getUserName());
         itemToSave.setOwner(owner);
+
+
+
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        System.out.println(fileName);
+        try {
+            itemToSave.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Item savedItem = itemRepository.save(itemToSave);
         return mapper.toDto(savedItem);
     }

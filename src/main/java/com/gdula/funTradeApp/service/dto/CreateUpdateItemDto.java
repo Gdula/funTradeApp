@@ -25,6 +25,8 @@ public class CreateUpdateItemDto {
 
     private Item.Category category;
 
+    private String image;
+
     private Item.Shape shape;
 
     private User owner;

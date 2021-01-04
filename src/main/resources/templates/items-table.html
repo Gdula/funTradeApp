@@ -15,13 +15,14 @@
         <td>price</td>
         <td>category</td>
         <td>shape</td>
+        <td>image</td>
     </tr>
     <tr th:each="item:${items}">
         <td th:text="${item.name}"></td>
         <td th:text="${item.price}"></td>
         <td th:text="${item.category}"></td>
         <td th:text="${item.shape}"></td>
-
+        <td><img alt="" th:src="*{'data:image/jpg;base64,'+ item.image}" style="width: 200px;"></td>
         <td>
             <a th:href="'delete-item/' + ${item.id}">Delete</a>
             <a th:href="'update-item/' + ${item.id}">Update</a>

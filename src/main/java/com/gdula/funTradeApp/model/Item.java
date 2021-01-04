@@ -37,6 +37,9 @@ public class Item {
         Book, Game, Music, Other
     }
 
+    @Lob
+    private String image;
+
     @NotNull
     private Shape shape;
     public static enum Shape {

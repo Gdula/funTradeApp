@@ -11,16 +11,19 @@ import java.util.UUID;
 public class ItemDtoMapper {
 
     public ItemDto toDto(Item item) {
-        return new ItemDto(item.getId(), item.getName(), item.getPrice(), item.getDescription(), item.getCategory(), item.getShape(), item.getOwner());
+        return new ItemDto(item.getId(), item.getName(), item.getPrice(), item.getDescription(), item.getCategory(),
+                item.getImage(), item.getShape(), item.getOwner());
     }
 
     public Item toModel(CreateUpdateItemDto dto) {
         String randomId = UUID.randomUUID().toString();
 
-        return new Item(randomId, dto.getName(), dto.getPrice(), dto.getDescription(), dto.getCategory(), dto.getShape(), dto.getOwner());
+        return new Item(randomId, dto.getName(), dto.getPrice(), dto.getDescription(), dto.getCategory(), dto.getImage(),
+                dto.getShape(), dto.getOwner());
     }
 
     public CreateUpdateItemDto toCreateUpdateItemDto(ItemDto dto) {
-        return new CreateUpdateItemDto(dto.getName(), dto.getPrice(), dto.getDescription(), dto.getCategory(), dto.getShape(), dto.getOwner());
+        return new CreateUpdateItemDto(dto.getName(), dto.getPrice(), dto.getDescription(), dto.getCategory(), dto.getImage(),
+                dto.getShape(), dto.getOwner());
     }
 }
