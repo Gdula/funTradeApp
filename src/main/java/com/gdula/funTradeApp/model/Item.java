@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -23,15 +24,20 @@ public class Item {
     @Size(min = 3)
     private String name;
 
+    @NotNull
     private Float price;
 
+    @NotBlank
+    @Size(min = 3)
+    private String description;
 
+    @NotNull
     private Category category;
     public static enum Category {
         Book, Game, Music, Other
     }
 
-
+    @NotNull
     private Shape shape;
     public static enum Shape {
         NEW, USED

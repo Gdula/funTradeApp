@@ -19,6 +19,10 @@ public class CreateUpdateItemDto {
 
     private Float price;
 
+    @NotBlank
+    @Size(min = 3)
+    private String description;
+
     private Item.Category category;
 
     private Item.Shape shape;

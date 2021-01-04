@@ -28,7 +28,8 @@ public class ItemService {
 
     public ItemDto createItem(CreateUpdateItemDto dto) throws ItemDataInvalid {
         if (dto.getName() == null || dto.getName().isEmpty() ||
-                dto.getPrice() == null || dto.getCategory() == null || dto.getShape() == null) {
+                dto.getPrice() == null || dto.getDescription() == null ||
+                dto.getDescription().isEmpty() || dto.getCategory() == null || dto.getShape() == null) {
             throw new ItemDataInvalid();
         }
 
@@ -41,7 +42,7 @@ public class ItemService {
 
     public ItemDto updateItem(CreateUpdateItemDto dto, String id) throws ItemDataInvalid, ItemNotFound {
         if (dto.getName() == null || dto.getName().isEmpty() ||
-                dto.getPrice() == null || dto.getCategory() == null || dto.getShape() == null) {
+                dto.getPrice() == null || dto.getDescription() == null || dto.getDescription().isEmpty() || dto.getCategory() == null || dto.getShape() == null) {
             throw new ItemDataInvalid();
         }
 
@@ -49,6 +50,7 @@ public class ItemService {
 
         item.setName(dto.getName());
         item.setPrice(dto.getPrice());
+        item.setDescription(dto.getDescription());
         item.setCategory(dto.getCategory());
         item.setShape(dto.getShape());
         Item savedItem = itemRepository.save(item);

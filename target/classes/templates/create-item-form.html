@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Create item</title>
 </head>
 <body>
 
@@ -14,7 +14,6 @@
     <fieldset>
         <label for="name-field">Name</label>
         <input type="text" id="name-field" th:field="*{name}">
-
         <div style="color: red" th:if="${#fields.hasErrors('name')}">
             Incorrect login (must be at least 3 characters long!
         </div>
@@ -25,12 +24,19 @@
         <input type="number" id="price-field" th:field="*{price}">
         <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
 
+        <br>
+
+        <label for="description-field">Description</label>
+        <input type="text" id="description-field" th:field="*{description}">
+        <div style="color: red" th:if="${#fields.hasErrors('description')}">
+            Incorrect description
+        </div>
 
         <br>
 
         <label for="category-field">Category</label>
-        <select th:field="*{category}">
-            <option th:each="c : ${categoryList}" th:value="${c}" th:text="${c}" />
+        <select id="category-field" th:field="*{category}">
+            <option th:each="c : ${categoryList}" th:value="${c}" th:text="${c}"></option>
         </select>
         <div style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
 
@@ -38,8 +44,8 @@
 
 
         <label for="shape-field">Shape</label>
-        <select th:field="*{shape}">
-            <option th:each="c : ${shapeList}" th:value="${c}" th:text="${c}" />
+        <select id="shape-field" th:field="*{shape}">
+            <option th:each="c : ${shapeList}" th:value="${c}" th:text="${c}"></option>
         </select>
         <div style="color: red" th:if="${#fields.hasErrors('shape')}" th:errors="*{shape}"></div>
 
