@@ -46,7 +46,8 @@ public class ItemViewController {
     }
 
     @PostMapping("/create-item")
-    public String createItem(@Valid @ModelAttribute(name = "dto") CreateUpdateItemDto dto, BindingResult bindingResult, Model model, @RequestParam("file") MultipartFile file) {
+    public String createItem(@Valid @ModelAttribute(name = "dto") CreateUpdateItemDto dto, BindingResult bindingResult,
+                             Model model, @RequestParam("file") MultipartFile file) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("items", itemService.getAllItems());
             return "create-item-form";
@@ -100,5 +101,14 @@ public class ItemViewController {
         } catch (ItemNotFound | ItemDataInvalid e) {
             return "redirect:/update-item/" + id;
         }
+    }
+
+    @GetMapping("/my-items")
+    public ModelAndView showUserItems() {
+        List<ItemDto> userItems = itemService.getAllUserItems();
+        ModelAndView mav = new ModelAndView("user-items-table");
+        mav.addObject("items", userItems);
+
+        return mav;
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
@@ -41,8 +42,6 @@ public class ItemService {
         Item itemToSave = mapper.toModel(dto);
         User owner = userRepository.findFirstByLogin(securityUtils.getUserName());
         itemToSave.setOwner(owner);
-
-
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         System.out.println(fileName);
@@ -77,6 +76,22 @@ public class ItemService {
     public List<ItemDto> getAllItems() {
         return itemRepository.findAll()
                 .stream()
+                .map(i -> mapper.toDto(i))
+                .collect(Collectors.toList());
+    }
+
+    public List<ItemDto> getAllUserItems() {
+        User user = userRepository.findFirstByLogin(securityUtils.getUserName());
+        List<Item> items = itemRepository.findAll();
+        List<Item> userItems = new ArrayList<>();
+
+        for (Item item : items) {
+            if (item.getOwner().equals(user)) {
+                userItems.add(item);
+            }
+        }
+
+        return userItems.stream()
                 .map(i -> mapper.toDto(i))
                 .collect(Collectors.toList());
     }
