@@ -65,6 +65,18 @@ public class ItemViewController {
         return "redirect:/items";
     }
 
+    @GetMapping("/show-item/{id}")
+    public ModelAndView displayItem(@PathVariable String id) {
+        try {
+            ItemDto itemById = itemService.getItemById(id);
+            ModelAndView mav = new ModelAndView("show-item");
+            mav.addObject("item", itemById);
+            return mav;
+        } catch (ItemNotFound e) {
+            return new ModelAndView("redirect:/items");
+        }
+    }
+
     @GetMapping("/delete-item/{id}")
     public String deleteItem(@PathVariable String id) {
         try {

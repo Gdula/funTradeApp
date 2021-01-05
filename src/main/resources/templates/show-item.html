@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+
+<h1 th:text="${item.name}"></h1>
+<img alt="" th:src="*{'data:image/jpg;base64,'+ item.image}" style="width: 200px;">
+<h2 th:text="${item.price}"></h2>
+<p th:text="${item.category}"></p>
+<p th:text="${item.description}"></p>
+<p th:text="${item.shape}"></p>
+
+
+
+<a href="/">Back to index</a>
+
+</body>
+</html>
