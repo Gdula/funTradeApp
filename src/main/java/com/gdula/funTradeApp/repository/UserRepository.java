@@ -12,4 +12,5 @@ public interface UserRepository extends CrudRepository<User, String> {
     Boolean existsByLogin(String string);
 
     User findFirstByLogin(String username);
+    User findFirstById(String id);
 }

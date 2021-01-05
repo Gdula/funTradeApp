@@ -4,9 +4,12 @@ import com.gdula.funTradeApp.model.Item;
 import com.gdula.funTradeApp.service.ItemService;
 import com.gdula.funTradeApp.service.dto.CreateUpdateItemDto;
 import com.gdula.funTradeApp.service.dto.ItemDto;
+import com.gdula.funTradeApp.service.dto.UserDto;
 import com.gdula.funTradeApp.service.exception.ItemDataInvalid;
 import com.gdula.funTradeApp.service.exception.ItemNotFound;
+import com.gdula.funTradeApp.service.exception.UserNotFound;
 import com.gdula.funTradeApp.service.mapper.ItemDtoMapper;
+import com.gdula.funTradeApp.service.mapper.UserDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +28,8 @@ public class ItemViewController {
     private ItemService itemService;
     @Autowired
     private ItemDtoMapper itemDtoMapper;
+    @Autowired
+    private UserDtoMapper userDtoMapper;
 
     @GetMapping("/items")
     public ModelAndView displayUsersTable() {
@@ -77,6 +82,19 @@ public class ItemViewController {
         }
     }
 
+    @GetMapping("/show-owner/{id}")
+    public ModelAndView displayOwnerByItemId(@PathVariable String id) {
+        try {
+            UserDto user = userDtoMapper.toDto(itemService.getItemById(id).getOwner());
+
+            ModelAndView mav = new ModelAndView("show-user");
+            mav.addObject("user", user);
+            return mav;
+        } catch (ItemNotFound e) {
+            return new ModelAndView("redirect:/items");
+        }
+    }
+
     @GetMapping("/delete-item/{id}")
     public String deleteItem(@PathVariable String id) {
         try {
@@ -116,11 +134,27 @@ public class ItemViewController {
     }
 
     @GetMapping("/my-items")
-    public ModelAndView showUserItems() {
-        List<ItemDto> userItems = itemService.getAllUserItems();
-        ModelAndView mav = new ModelAndView("user-items-table");
+    public ModelAndView showLoggedUserItems() {
+        List<ItemDto> userItems = itemService.getLoggedUserItems();
+        ModelAndView mav = new ModelAndView("logged-user-items-table");
         mav.addObject("items", userItems);
 
         return mav;
     }
+
+    @GetMapping("show-owner/user-items-table/{id}")
+    public ModelAndView showUserItems(@PathVariable String id) {
+        try {
+            List<ItemDto> userItems = itemService.getAllUserItemsByUserId(id);
+            ModelAndView mav = new ModelAndView("user-items-table");
+            mav.addObject("items", userItems);
+
+            return mav;
+        } catch (UserNotFound e) {
+            return new ModelAndView("redirect:/user/" + id);
+        }
+
+    }
+
+
 }

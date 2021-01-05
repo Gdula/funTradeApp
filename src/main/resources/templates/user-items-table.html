@@ -24,8 +24,7 @@
         <td th:text="${item.shape}"></td>
         <td><img alt="" th:src="*{'data:image/jpg;base64,'+ item.image}" style="width: 200px;"></td>
         <td>
-            <a th:href="'delete-item/' + ${item.id}">Delete</a>
-            <a th:href="'update-item/' + ${item.id}">Update</a>
+            <a th:href="'show-item/' + ${item.id}">Show</a>
         </td>
 
 

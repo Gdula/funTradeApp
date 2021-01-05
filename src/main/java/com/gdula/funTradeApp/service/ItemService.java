@@ -8,6 +8,7 @@ import com.gdula.funTradeApp.service.dto.CreateUpdateItemDto;
 import com.gdula.funTradeApp.service.dto.ItemDto;
 import com.gdula.funTradeApp.service.exception.ItemDataInvalid;
 import com.gdula.funTradeApp.service.exception.ItemNotFound;
+import com.gdula.funTradeApp.service.exception.UserNotFound;
 import com.gdula.funTradeApp.service.mapper.ItemDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +29,8 @@ public class ItemService {
     private SecurityUtils securityUtils;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     public ItemDto createItem(CreateUpdateItemDto dto, MultipartFile file) throws ItemDataInvalid {
         if (dto.getName() == null || dto.getName().isEmpty() ||
@@ -80,7 +80,7 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-    public List<ItemDto> getAllUserItems() {
+    public List<ItemDto> getLoggedUserItems() {
         User user = userRepository.findFirstByLogin(securityUtils.getUserName());
         List<Item> items = itemRepository.findAll();
         List<Item> userItems = new ArrayList<>();
@@ -92,6 +92,14 @@ public class ItemService {
         }
 
         return userItems.stream()
+                .map(i -> mapper.toDto(i))
+                .collect(Collectors.toList());
+    }
+
+    public List<ItemDto> getAllUserItemsByUserId(String id) throws UserNotFound {
+        return userService.getUserById(id)
+                .getItems()
+                .stream()
                 .map(i -> mapper.toDto(i))
                 .collect(Collectors.toList());
     }

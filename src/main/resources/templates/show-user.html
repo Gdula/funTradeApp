@@ -7,13 +7,11 @@
 </head>
 <body>
 
-<h1 th:text="${item.name}"></h1>
-<img alt="" th:src="*{'data:image/jpg;base64,'+ item.image}" style="width: 200px;">
-<h2 th:text="${item.price}"></h2>
-<p th:text="${item.category}"></p>
-<p th:text="${item.description}"></p>
-<p th:text="${item.shape}"></p>
-
+<h1 th:text="${user.login}"></h1>
+<h2 th:text="${user.name}"></h2>
+<p th:text="${user.surname}"></p>
+<p th:text="${user.city}"></p>
+<a th:href="'user-items-table/' + ${user.id}">Pokaż przedmioty do wymiany</a>
 
 
 <a href="/">Back to index</a>
