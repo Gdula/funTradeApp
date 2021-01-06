@@ -11,6 +11,7 @@ import com.gdula.funTradeApp.service.exception.UserNotFound;
 import com.gdula.funTradeApp.service.mapper.ItemDtoMapper;
 import com.gdula.funTradeApp.service.mapper.UserDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -70,7 +71,7 @@ public class ItemViewController {
         return "redirect:/items";
     }
 
-    @GetMapping(value = {"/show-item/{id}", "/show-owner/user-items-table/show-item/{id}"})
+    @GetMapping(value = {"/show-item/{id}", "/user-items-table/show-item/{id}", "/show-owner/user-items-table/show-item/{id}"})
     public ModelAndView displayItem(@PathVariable String id) {
         try {
             ItemDto itemById = itemService.getItemById(id);
@@ -148,12 +149,19 @@ public class ItemViewController {
             List<ItemDto> userItems = itemService.getAllUserItemsByUserId(id);
             ModelAndView mav = new ModelAndView("user-items-table");
             mav.addObject("items", userItems);
-
             return mav;
         } catch (UserNotFound e) {
             return new ModelAndView("redirect:/user/" + id);
         }
 
+    }
+
+    @RequestMapping("/search-item")
+    public ModelAndView showItemSearchResult(@Param("keyword") String keyword) {
+        List<ItemDto> items = itemService.getAllItemsWithKeyword(keyword);
+        ModelAndView mav = new ModelAndView("items-table");
+        mav.addObject("items", items);
+        return mav;
     }
 
 

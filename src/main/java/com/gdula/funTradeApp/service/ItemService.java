@@ -118,4 +118,14 @@ public class ItemService {
 
         return mapper.toDto(item);
     }
+
+    public List<ItemDto> getAllItemsWithKeyword(String keyword) {
+        if (keyword != null) {
+            return itemRepository.findAllWithKeyword(keyword)
+                    .stream()
+                    .map(i -> mapper.toDto(i))
+                    .collect(Collectors.toList());
+        }
+        return getAllItems();
+    }
 }
