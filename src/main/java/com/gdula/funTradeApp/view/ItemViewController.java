@@ -70,7 +70,7 @@ public class ItemViewController {
         return "redirect:/items";
     }
 
-    @GetMapping("/show-item/{id}")
+    @GetMapping(value = {"/show-item/{id}", "/show-owner/user-items-table/show-item/{id}"})
     public ModelAndView displayItem(@PathVariable String id) {
         try {
             ItemDto itemById = itemService.getItemById(id);
@@ -142,7 +142,7 @@ public class ItemViewController {
         return mav;
     }
 
-    @GetMapping("show-owner/user-items-table/{id}")
+    @GetMapping(value = {"show-owner/user-items-table/{id}", "/user-items-table/{id}"})
     public ModelAndView showUserItems(@PathVariable String id) {
         try {
             List<ItemDto> userItems = itemService.getAllUserItemsByUserId(id);
