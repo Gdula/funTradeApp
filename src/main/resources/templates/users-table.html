@@ -9,6 +9,14 @@
 
 <h1>Users table</h1>
 
+<form th:action="@{/search-user}">
+    Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+    &nbsp;
+    <input type="submit" value="Search" />
+    &nbsp;
+    <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+</form>
+
 <table>
     <tr>
         <td>login</td>
@@ -34,6 +42,12 @@
 </table>
 
 <a href="/">Back to index</a>
+
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/users}]]";
+    }
+</script>
 
 </body>
 </html>

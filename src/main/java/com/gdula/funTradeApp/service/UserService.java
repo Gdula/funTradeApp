@@ -3,6 +3,7 @@ package com.gdula.funTradeApp.service;
 import com.gdula.funTradeApp.model.User;
 import com.gdula.funTradeApp.repository.UserRepository;
 import com.gdula.funTradeApp.service.dto.CreateUserDto;
+import com.gdula.funTradeApp.service.dto.ItemDto;
 import com.gdula.funTradeApp.service.dto.UpdateUserDto;
 import com.gdula.funTradeApp.service.dto.UserDto;
 import com.gdula.funTradeApp.service.exception.UserAlreadyExists;
@@ -91,6 +92,16 @@ public class UserService {
         userRepository.delete(user);
 
         return mapper.toDto(user);
+    }
+
+    public List<UserDto> getAllUsersWithKeyword(String keyword) {
+        if (keyword != null) {
+            return userRepository.findAllWithKeyword(keyword)
+                    .stream()
+                    .map(u -> mapper.toDto(u))
+                    .collect(Collectors.toList());
+        }
+        return getAllUsers();
     }
 
 }
