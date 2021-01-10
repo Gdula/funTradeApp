@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -43,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests() // autoryzuj wszystkie żądania
                 .antMatchers("/admin/**").hasRole("ADMIN") // tylko użytkownik z rolą ADMIN ma dostęp do /admin/**
                 .antMatchers("/create-user/**").permitAll()
+                .antMatchers("/home").permitAll()
                 .anyRequest().authenticated() // wszystkie pozostałe zapytania dostępne tylko dla zalogowanych
                 .and()
                 .formLogin() // generowanie formularza logowania
@@ -52,6 +54,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout(); // dodanie wylogowania pod adresem /logout
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/vendor/**","/fonts/**");
     }
 
 }

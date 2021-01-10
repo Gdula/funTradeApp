@@ -164,5 +164,10 @@ public class ItemViewController {
         return mav;
     }
 
+    @GetMapping("/home")
+    public ModelAndView showHomePage() {
+        return new ModelAndView("index-v2");
+    }
+
 
 }
