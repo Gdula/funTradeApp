@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests() // autoryzuj wszystkie żądania
                 .antMatchers("/admin/**").hasRole("ADMIN") // tylko użytkownik z rolą ADMIN ma dostęp do /admin/**
                 .antMatchers("/create-user/**").permitAll()
-                .antMatchers("/home").permitAll()
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated() // wszystkie pozostałe zapytania dostępne tylko dla zalogowanych
                 .and()
                 .formLogin() // generowanie formularza logowania
