@@ -28,7 +28,7 @@ public class UserViewController {
 
     @GetMapping("/users")
     public ModelAndView displayUsersTable() {
-        ModelAndView mav = new ModelAndView("users-table");
+        ModelAndView mav = new ModelAndView("users-admin-table");
         List<UserDto> allUsers = userService.getAllUsers();
         mav.addObject("users", allUsers);
 
@@ -106,7 +106,7 @@ public class UserViewController {
     @RequestMapping("/search-user")
     public ModelAndView showUserSearchResult(@Param("keyword") String keyword) {
         List<UserDto> users = userService.getAllUsersWithKeyword(keyword);
-        ModelAndView mav = new ModelAndView("users-table");
+        ModelAndView mav = new ModelAndView("users-admin-table");
         mav.addObject("users", users);
         return mav;
     }
