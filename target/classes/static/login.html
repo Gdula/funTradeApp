@@ -3,22 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 
-<body>
-<form action="login.html" method="post">
-    <fieldset>
-        <label type="text" for="login-input">Login:</label>
-        <input id="login-input" name="login">
-        <br>
-        <label for="pass-input">Password:</label>
-        <input type="password" id="pass-input" name="pass">
-        <br>
-        <a href="/create-user" style="color: #000000; text-decoration: none">Register</a>
-    </fieldset>
+<style>
+    html, body {
+        height: 100%;
+    }
 
-    <input type="submit" value="Login">
-</form>
+    html {
+        display: table;
+        margin: auto;
+    }
+
+    body {
+        font-family: 'Ubuntu', sans-serif;
+        display: table-cell;
+        vertical-align: middle;
+        background-image: url("/images/cool-background.png");
+        background-position: center;
+        background-size: cover;
+
+        }
+    fieldset
+    {
+        color: white;
+        min-width: 400px;
+        min-height: 200px;
+        text-align: center;
+        width: 100vw;
+        position: relative;
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+
+    }
+
+    h1
+    {
+        text-align: center;
+        color: white;
+    }
+
+    p
+    {
+        font-family: 'Nova Square', cursive;
+        text-align: center;
+        font-size: 70px;
+        color: white;
+    }
+
+
+</style>
+
+<body>
+<div class="center">
+    <h1>
+        Zaloguj się do <p>Fun Trade</p>
+    </h1>
+    <form action="login.html" method="post">
+        <fieldset>
+            <label type="text" for="login-input">Login:</label>
+            <input id="login-input" name="login">
+            <br>
+            <label for="pass-input">Hasło:</label>
+            <input type="password" id="pass-input" name="pass">
+            <br>
+            <input type="submit" value="Zaloguj">
+            <br>
+            <a href="/create-user" style="color: white; text-decoration: none">Zarejestruj się</a>
+        </fieldset>
+
+    </form>
+</div>
 
 </body>
 </html>

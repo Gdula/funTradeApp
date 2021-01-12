@@ -12,10 +12,8 @@ body
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Ubuntu', sans-serif;
-    padding-bottom:50px;    /* Height of the footer */
+    padding-bottom:60px;    /* Height of the footer */
     background-attachment: fixed;
-    display: inline-block;
-
 }
 
 #logo
@@ -27,7 +25,7 @@ body
 
 #logo-lettering
 {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Nova Square', cursive;
 }
 
 
@@ -69,6 +67,7 @@ body
 
 #footer
 {
+    margin-top: 200px;
     position:fixed;
     bottom:0;
     width:100%;
@@ -79,6 +78,11 @@ body
     justify-content: center;
     align-items: center;
     background-color: black;
+}
+
+#fott
+{
+    height: 60px;
 }
 
 

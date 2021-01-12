@@ -10,4 +10,6 @@ public class WelcomePageViewController {
     public ModelAndView showHomePage() {
         return new ModelAndView("index-v2");
     }
+
+
 }
