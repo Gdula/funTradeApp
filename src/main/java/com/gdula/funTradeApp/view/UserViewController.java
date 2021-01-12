@@ -61,7 +61,7 @@ public class UserViewController {
             return "create-user-form";
         }
 
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @GetMapping("/delete-user/{id}")
