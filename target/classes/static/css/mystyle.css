@@ -31,7 +31,6 @@ body
 
 #welcome-section
 {
-    height: 75vh;
     display: flex;
     flex-flow: column;
     color: snow;
@@ -46,7 +45,6 @@ body
     align-content: center;
     text-align: center;
     display: block;
-
 }
 
 .welcome-header
@@ -97,4 +95,35 @@ body
     color: white;
     text-decoration: none;
 }
+
+#user-list
+{
+    padding-top: 20px;
+    text-align: center;
+    color: white;
+
+}
+
+.user-table-center
+{
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    background-color: black;
+    border-radius: 5px;
+}
+
+td
+{
+    border: 3px solid white;
+    margin: 4px;
+}
+
+#user-buttons
+{
+  color: black;
+}
+
+
+
 
