@@ -61,40 +61,42 @@
     </nav>
 </header>
 
-<div id="registry-form-1">
+<div id="center-form">
     <h1>Użytkownicy</h1>
 
     <form th:action="@{/search-user}">
         <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
         &nbsp;
-        <input class="btn btn-dark" type="submit" value="Szukaj" />
+        <input class="btn btn-light" type="submit" value="Szukaj" />
         &nbsp;
-        <input class="btn btn-dark" type="button" value="Wyczyść" id="btnClear" onclick="clearSearch()" />
+        <input class="btn btn-light" type="button" value="Wyczyść" id="btnClear" onclick="clearSearch()" />
     </form>
 
-    <div id="user-list">
-        <table class="user-table-center">
-            <tr>
-                <td>Login</td>
-                <td>Adres E-mail</td>
-                <td>Imię</td>
-                <td>Nazwisko</td>
-                <td></td>
-            </tr>
-            <tr th:each="user:${users}">
-                <td th:text="${user.login}"></td>
-                <td th:text="${user.mail}"></td>
-                <td th:text="${user.name}"></td>
-                <td th:text="${user.surname}"></td>
+    <div id="form-list">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <td>Login</td>
+                    <td>Adres E-mail</td>
+                    <td>Imię</td>
+                    <td>Nazwisko</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user:${users}">
+                    <td th:text="${user.login}"></td>
+                    <td th:text="${user.mail}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.surname}"></td>
 
-                <td id="user-buttons">
-                    <a class="btn btn-light" th:href="'delete-user/' + ${user.id}">Usuń</a>
-                    <a class="btn btn-light" th:href="'update-user/' + ${user.id}">Aktualizuj</a>
-                    <a class="btn btn-light" th:href="'user-items-table/' + ${user.id}">Pokaż przedmioty do wymiany</a>
-
-                </td>
-
-            </tr>
+                    <td id="form-buttons">
+                        <a class="btn btn-light" th:href="'delete-user/' + ${user.id}">Usuń</a>
+                        <a class="btn btn-light" th:href="'update-user/' + ${user.id}">Aktualizuj</a>
+                        <a class="btn btn-light" th:href="'user-items-table/' + ${user.id}">Pokaż przedmioty do wymiany</a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
