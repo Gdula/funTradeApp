@@ -62,6 +62,7 @@
 </header>
 
 <div id="center-form">
+
     <h1>Przedmioty</h1>
 
     <form th:action="@{/search-item}">
@@ -91,7 +92,6 @@
                     <td th:text="${item.category}"></td>
                     <td th:text="${item.shape}"></td>
                     <td><img alt="" th:src="*{'data:image/jpg;base64,'+ item.image}" style="width: 200px;"></td>
-
                     <td id="form-buttons">
                         <a class="btn btn-light" th:href="'show-item/' + ${item.id}">Pokaż przedmiot</a>
                         <a class="btn btn-light" th:href="'show-owner/' + ${item.id}">Wyświetl profil właściciela przedmiotu</a>
@@ -101,12 +101,15 @@
         </table>
     </div>
 </div>
+
 <div id="footer">
     <p>Daniel Gdula 2020 © Wszelkie prawa zastrzeżone.</p>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}" ></script>
+
 <script type="text/javascript">
     function clearSearch() {
         window.location = "[[@{/items}]]";

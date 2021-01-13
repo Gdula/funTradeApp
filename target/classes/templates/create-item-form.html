@@ -68,7 +68,7 @@
 
     <form action="#" th:action="@{/create-item}" th:object="${dto}" method="post" enctype="multipart/form-data">
         <fieldset>
-            <label for="name-field">Name</label>
+            <label for="name-field">Nazwa</label>
             <input type="text" id="name-field" th:field="*{name}">
             <div style="color: red" th:if="${#fields.hasErrors('name')}">
                 Incorrect login (must be at least 3 characters long!
@@ -76,13 +76,13 @@
 
             <br>
 
-            <label for="price-field">Price</label>
+            <label for="price-field">Cena</label>
             <input type="number" id="price-field" th:field="*{price}">
             <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
 
             <br>
 
-            <label for="description-field">Description</label>
+            <label for="description-field">Opis</label>
             <textarea type="text" id="description-field" th:field="*{description}"></textarea>
             <div style="color: red" th:if="${#fields.hasErrors('description')}">
                 Incorrect description
@@ -90,7 +90,7 @@
 
             <br>
 
-            <label for="category-field">Category</label>
+            <label for="category-field">Kategoria</label>
             <select id="category-field" th:field="*{category}">
                 <option th:each="c : ${categoryList}" th:value="${c}" th:text="${c}"></option>
             </select>
@@ -99,7 +99,7 @@
             <br>
 
 
-            <label for="shape-field">Shape</label>
+            <label for="shape-field">Stan</label>
             <select id="shape-field" th:field="*{shape}">
                 <option th:each="c : ${shapeList}" th:value="${c}" th:text="${c}"></option>
             </select>
@@ -107,7 +107,7 @@
 
             <br>
 
-            <label for="image-field">Add image</label>
+            <label for="image-field">Dodaj zdjęcie</label>
             <input type="file" name="file" id="image-field">
             <div style="color: red" th:if="${#fields.hasErrors('image')}">
                 Incorrect image

@@ -1,39 +1,104 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Items</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css">
+    <title>Fun Trade</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h1>Items table</h1>
+<header>
+    <nav class="navbar navbar-dark navbar-expand-md">
 
-<table>
-    <tr>
-        <td>name</td>
-        <td>price</td>
-        <td>category</td>
-        <td>shape</td>
-        <td>image</td>
-    </tr>
-    <tr th:each="item:${items}">
-        <td th:text="${item.name}"></td>
-        <td th:text="${item.price}"></td>
-        <td th:text="${item.category}"></td>
-        <td th:text="${item.shape}"></td>
-        <td><img alt="" th:src="*{'data:image/jpg;base64,'+ item.image}" style="width: 200px;"></td>
-        <td>
-            <a th:href="'delete-item/' + ${item.id}">Delete</a>
-            <a th:href="'update-item/' + ${item.id}">Update</a>
-            <a th:href="'show-item/' + ${item.id}">Show</a>
-        </td>
+        <a class="navbar-brand" href="/home" id="logo-lettering"><img id="logo" th:src="@{/images/logo.png}" src="../static/images/logo.png"
+                                                                      width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">Fun Trade</a>
 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                aria-controls="main-menu" aria-expanded="false" aria-label="Przełącznik nawigacji">
 
-    </tr>
-</table>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<a href="/">Back to index</a>
+        <div class="collapse navbar-collapse justify-content-end" id="main-menu">
 
+            <ul class="navbar-nav">
+                <li class="navbar-item">
+                    <a class="nav-link" href="/"> Start </a>
+                </li>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/users"> Użytkownicy </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> Przedmioty </a>
+
+                    <div class="dropdown-menu">
+
+                        <a class="dropdown-item" href="/items"> Wyświetl przedmioty </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/create-item"> Stwórz Przedmiot </a>
+                        <a class="dropdown-item" href="/my-items"> Wyświetl moje przedmioty </a>
+
+                    </div>
+
+                </li>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/login.html"> Zaloguj się </a>
+                </li>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/create-user"> Zarejestruj się </a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div id="center-form">
+
+    <h1>Moje przedmioty</h1>
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <td>Nazwa</td>
+                <td>Cena</td>
+                <td>Kategoria</td>
+                <td>Stan</td>
+                <td>Zdjęcie</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item:${items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.category}"></td>
+                <td th:text="${item.shape}"></td>
+                <td><img alt="" th:src="*{'data:image/jpg;base64,'+ item.image}" style="width: 200px;"></td>
+                <td id="form-buttons">
+                    <a class="btn btn-light" th:href="'delete-item/' + ${item.id}">Usuń</a>
+                    <a class="btn btn-light" th:href="'update-item/' + ${item.id}">Aktualizuj</a>
+                    <a class="btn btn-light" th:href="'show-item/' + ${item.id}">Pokaż przedmiot</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="footer">
+    <p>Daniel Gdula 2020 © Wszelkie prawa zastrzeżone.</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}" ></script>
 </body>
 </html>
