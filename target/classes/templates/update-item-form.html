@@ -1,63 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Update item</title>
+    <title>Fun Trade</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h1>
-    Update item with ID <b th:text="${id}"></b>
-</h1>
+<header>
+    <nav class="navbar navbar-dark navbar-expand-md">
 
-<form action="#" th:action="@{/update-item/{id}(id=${id})}" th:object="${dto}" method="post">
-    <fieldset>
-        <label for="name-field">Name</label>
-        <input type="text" id="name-field" th:field="*{name}">
+        <a class="navbar-brand" href="/home" id="logo-lettering"><img id="logo" th:src="@{/images/logo.png}" src="../static/images/logo.png"
+                                                                      width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">Fun Trade</a>
 
-        <div style="color: red" th:if="${#fields.hasErrors('name')}">
-            Incorrect name (must be at least 3 characters long!
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                aria-controls="main-menu" aria-expanded="false" aria-label="Przełącznik nawigacji">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="main-menu">
+
+            <ul class="navbar-nav">
+                <li class="navbar-item">
+                    <a class="nav-link" href="/"> Start </a>
+                </li>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/users"> Użytkownicy </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> Przedmioty </a>
+
+                    <div class="dropdown-menu">
+
+                        <a class="dropdown-item" href="/items"> Wyświetl przedmioty </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/create-item"> Stwórz Przedmiot </a>
+                        <a class="dropdown-item" href="/my-items"> Wyświetl moje przedmioty </a>
+
+                    </div>
+
+                </li>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/login.html"> Zaloguj się </a>
+                </li>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/create-user"> Zarejestruj się </a>
+                </li>
+
+            </ul>
         </div>
+    </nav>
+</header>
 
-        <br>
+<div id="center-form">
+    <h1>
+        Aktualizuj przedmiot o nazwie <b th:text="${name}"></b>
+    </h1>
 
-        <label for="price-field">Price</label>
-        <input type="number" id="price-field" th:field="*{price}">
-        <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+    <form action="#" th:action="@{/update-item/{id}(id=${id})}" th:object="${dto}" method="post">
+        <fieldset>
+            <label for="name-field">Nazwa</label>
+            <input type="text" id="name-field" th:field="*{name}">
 
-        <br>
+            <div style="color: red" th:if="${#fields.hasErrors('name')}">
+                Incorrect name (must be at least 3 characters long!
+            </div>
 
-        <label for="description-field">Description</label>
-        <input type="text" id="description-field" th:field="*{description}">
-        <div style="color: red" th:if="${#fields.hasErrors('description')}">
-            Incorrect description
-        </div>
+            <br>
 
-        <br>
+            <label for="price-field">Cena</label>
+            <input type="number" id="price-field" th:field="*{price}">
+            <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
 
-        <label for="category-field">Category</label>
-        <select id="category-field" th:field="*{category}">
-            <option th:each="c : ${categoryList}" th:value="${c}" th:text="${c}" />
-        </select>
-        <div style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+            <br>
 
-        <br>
+            <label for="description-field">Opis</label>
+            <input type="text" id="description-field" th:field="*{description}">
+            <div style="color: red" th:if="${#fields.hasErrors('description')}">
+                Incorrect description
+            </div>
+
+            <br>
+
+            <label for="category-field">Kategoria</label>
+            <select id="category-field" th:field="*{category}">
+                <option th:each="c : ${categoryList}" th:value="${c}" th:text="${c}" />
+            </select>
+            <div style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+
+            <br>
 
 
-        <label for="shape-field">Shape</label>
-        <select id="shape-field" th:field="*{shape}">
-            <option th:each="c : ${shapeList}" th:value="${c}" th:text="${c}" />
-        </select>
-        <div style="color: red" th:if="${#fields.hasErrors('shape')}" th:errors="*{shape}"></div>
+            <label for="shape-field">Stan</label>
+            <select id="shape-field" th:field="*{shape}">
+                <option th:each="c : ${shapeList}" th:value="${c}" th:text="${c}" />
+            </select>
+            <div style="color: red" th:if="${#fields.hasErrors('shape')}" th:errors="*{shape}"></div>
 
-        <br>
+            <br>
 
-    </fieldset>
+        </fieldset>
 
-    <input type="submit" value="Update">
-</form>
+        <input class="btn btn-dark" type="submit" value="Update">
+    </form>
+</div>
 
-<a href="/">Back to index</a>
+<div id="footer">
+    <p>Daniel Gdula 2020 © Wszelkie prawa zastrzeżone.</p>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}" ></script>
 </body>
 </html>
