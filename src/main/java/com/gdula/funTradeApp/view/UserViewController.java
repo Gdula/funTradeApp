@@ -110,4 +110,17 @@ public class UserViewController {
         mav.addObject("users", users);
         return mav;
     }
+
+    @GetMapping("/show-user/{id}")
+    public ModelAndView showUserById(@PathVariable String id) {
+        try {
+            UserDto userById = userService.getUserById(id);
+            ModelAndView mav = new ModelAndView("show-user");
+            mav.addObject("user" ,userById);
+            return mav;
+        } catch (UserNotFound e) {
+            return new ModelAndView("redirect:/users");
+        }
+    }
+
 }
