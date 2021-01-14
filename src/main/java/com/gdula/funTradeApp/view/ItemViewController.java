@@ -75,10 +75,10 @@ public class ItemViewController {
     public ModelAndView displayItem(@PathVariable String id) {
         try {
             ItemDto itemById = itemService.getItemById(id);
-            String userId = itemById.getOwner().getId();
+            String userMail = itemById.getOwner().getMail();
             ModelAndView mav = new ModelAndView("show-item");
             mav.addObject("item", itemById);
-            mav.addObject("userId", userId);
+            mav.addObject("userMail", userMail);
 
             return mav;
         } catch (ItemNotFound e) {
