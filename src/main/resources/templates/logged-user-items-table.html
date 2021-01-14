@@ -83,7 +83,7 @@
                 <td th:text="${item.category}"></td>
                 <td th:text="${item.shape}"></td>
                 <td><img alt="" th:src="*{'data:image/jpg;base64,'+ item.image}" style="width: 200px;"></td>
-                <td id="form-buttons">
+                <td id="custom-button">
                     <a class="btn btn-light" th:href="'delete-item/' + ${item.id}">Usuń</a>
                     <a class="btn btn-light" th:href="'update-item/' + ${item.id}">Aktualizuj</a>
                     <a class="btn btn-light" th:href="'show-item/' + ${item.id}">Pokaż przedmiot</a>
