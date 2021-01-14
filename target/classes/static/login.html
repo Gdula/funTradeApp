@@ -70,19 +70,30 @@
     </h1>
     <form action="login.html" method="post">
         <fieldset>
+
             <label type="text" for="login-input">Login:</label>
             <input id="login-input" name="login">
+            
             <br>
+
             <label for="pass-input">Hasło:</label>
             <input type="password" id="pass-input" name="pass">
+
             <br>
+
             <input type="submit" value="Zaloguj">
+
             <br>
-            <a href="/create-user" style="color: white; text-decoration: none">Zarejestruj się</a>
+
+            <button onclick="location.href='/create-user'" type="button">
+                Zarejestruj się</button>
+
+            <button onclick="location.href='/'" type="button">
+                Powrót na stronę główną</button>
         </fieldset>
 
     </form>
-    <a id="back-button" href="/">Powrót</a>
+
 </div>
 
 </body>
