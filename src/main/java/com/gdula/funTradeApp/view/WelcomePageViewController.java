@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class WelcomePageViewController {
     @GetMapping("/")
     public ModelAndView showHomePage() {
-        return new ModelAndView("index-v2");
+        return new ModelAndView("index");
     }
 
 
