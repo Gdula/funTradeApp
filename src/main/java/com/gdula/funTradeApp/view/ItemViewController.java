@@ -71,7 +71,8 @@ public class ItemViewController {
         return "redirect:/items";
     }
 
-    @GetMapping(value = {"/show-item/{id}", "/user-items-table/show-item/{id}", "/show-owner/user-items-table/show-item/{id}"})
+    @GetMapping(value = {"/show-item/{id}", "/user-items-table/show-item/{id}",
+            "/show-owner/user-items-table/show-item/{id}", "/show-user/user-items-table/show-item/{id}"})
     public ModelAndView displayItem(@PathVariable String id) {
         try {
             ItemDto itemById = itemService.getItemById(id);
@@ -86,7 +87,10 @@ public class ItemViewController {
         }
     }
 
-    @GetMapping(value = {"/show-owner/{id}", "/show-item/show-owner/{id}"})
+    @GetMapping(value = {"/show-owner/{id}", "/show-item/show-owner/{id}",
+            "/show-user/user-items-table/show-item/show-owner/user-items-table/{id}",
+    "/show-owner/user-items-table/show-item/show-owner/{id}",
+    "/user-items-table/show-item/show-owner/{id}"})
     public ModelAndView displayOwnerByItemId(@PathVariable String id) {
         try {
             UserDto user = userDtoMapper.toDto(itemService.getItemById(id).getOwner());
@@ -146,7 +150,8 @@ public class ItemViewController {
         return mav;
     }
 
-    @GetMapping(value = {"show-owner/user-items-table/{id}", "/user-items-table/{id}", "/show-item/show-owner/user-items-table/{id}"})
+    @GetMapping(value = {"show-owner/user-items-table/{id}", "/user-items-table/{id}",
+            "/show-item/show-owner/user-items-table/{id}", "/show-user/user-items-table/{id}"})
     public ModelAndView showUserItems(@PathVariable String id) {
         try {
             List<ItemDto> userItems = itemService.getAllUserItemsByUserId(id);
